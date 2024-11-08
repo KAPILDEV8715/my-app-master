@@ -1,8 +1,8 @@
-import {Text,View,TextInput,TouchableOpacity,Alert,ImageBackground,} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import { Text, View, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {NavigationProp} from '@react-navigation/native';
-import RegistrationStyle from '../styles/RegistrationStyle';
+import RegistrationStyle from './RegistrationStyle';
+import  { NavigationProp } from '@react-navigation/native'
 
 interface RegistrationProps {
   navigation: NavigationProp<any>;
@@ -12,6 +12,7 @@ interface RegistrationProps {
       email?: string;
       password?: string;
       id?: number;
+      from?: 'Home' | 'login'; 
     };
   };
 }
@@ -22,12 +23,13 @@ interface Errors {
   password?: string;
 }
 
-const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
+const Registration: React.FC<RegistrationProps> = ({ navigation, route }) => {
   const {
     name: initialName = '',
     email: initialEmail = '',
     password: initialPassword = '',
     id,
+    from, // Destructure the 'from' parameter
   } = route.params || {};
 
   const [name, setName] = useState<string>(initialName);
@@ -57,14 +59,12 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
   const handleSubmit = async () => {
     if (isFormValid) {
       try {
-        const newUserData = {name, email, password, id: id || Date.now()};
+        const newUserData = { name, email, password, id: id || Date.now() };
         const existingDataString = await AsyncStorage.getItem('userData');
-        let existingData = existingDataString
-          ? JSON.parse(existingDataString)
-          : [];
+        let existingData = existingDataString ? JSON.parse(existingDataString) : [];
 
         if (id) {
-          existingData = existingData.map((user: {id: number}) =>
+          existingData = existingData.map((user: { id: number }) =>
             user.id === id ? newUserData : user,
           );
         } else {
@@ -73,7 +73,14 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
 
         await AsyncStorage.setItem('userData', JSON.stringify(existingData));
         Alert.alert('Data saved successfully!');
-        navigation.navigate('Login');
+
+        // Navigate based on the 'from' parameter
+        if (from === 'Home') {
+          navigation.navigate('Home'); // Navigate to Home if coming from there
+        }
+        else {
+          navigation.navigate('');
+        }
       } catch (error) {
         console.error('Error saving data', error);
         Alert.alert('Failed to save data.');
@@ -88,7 +95,8 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
       <ImageBackground
         source={require('../src/background5.jpg')}
         style={RegistrationStyle.background}
-        resizeMode="cover">
+        resizeMode="cover"
+      >
         <Text style={RegistrationStyle.title}>Register User</Text>
         <View style={RegistrationStyle.formContainer}>
           <TextInput
@@ -98,9 +106,7 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
             onChangeText={setName}
             placeholderTextColor="#aaaaaa"
           />
-          {errors.name && (
-            <Text style={RegistrationStyle.error}>{errors.name}</Text>
-          )}
+          {errors.name && <Text style={RegistrationStyle.error}>{errors.name}</Text>}
 
           <TextInput
             style={RegistrationStyle.input}
@@ -110,9 +116,7 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
             keyboardType="email-address"
             placeholderTextColor="#aaaaaa"
           />
-          {errors.email && (
-            <Text style={RegistrationStyle.error}>{errors.email}</Text>
-          )}
+          {errors.email && <Text style={RegistrationStyle.error}>{errors.email}</Text>}
 
           <TextInput
             style={RegistrationStyle.input}
@@ -122,21 +126,21 @@ const Registration: React.FC<RegistrationProps> = ({navigation, route}) => {
             secureTextEntry
             placeholderTextColor="#aaaaaa"
           />
-          {errors.password && (
-            <Text style={RegistrationStyle.error}>{errors.password}</Text>
-          )}
+          {errors.password && <Text style={RegistrationStyle.error}>{errors.password}</Text>}
 
           <TouchableOpacity
             style={[RegistrationStyle.button]}
             disabled={!isFormValid}
-            onPress={handleSubmit}>
+            onPress={handleSubmit}
+          >
             <Text style={RegistrationStyle.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
         <View style={RegistrationStyle.backButtonContainer}>
           <TouchableOpacity
             style={RegistrationStyle.backButton}
-            onPress={() => navigation.goBack()}>
+            onPress={() => navigation.goBack()}
+          >
             <Text style={RegistrationStyle.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>

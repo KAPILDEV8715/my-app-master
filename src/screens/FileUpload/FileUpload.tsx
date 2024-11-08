@@ -114,7 +114,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Alert, ScrollView, TouchableOpacity, ImageBackground, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FileUploadStyle from '../styles/FileUploadStyle';
+import FileUploadStyle from './FileUploadStyle';
 
 let DocumentPicker: any;
 
@@ -128,21 +128,34 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const handleDocumentSelection = async () => {
     if (Platform.OS === 'web') {
-      Alert.alert('File selection is not supported on the web');
-      return;
-    }
-
-    try {
-      const results = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
-        allowMultiSelection: true,
-      });
-      setFileResponses(results);
-    } catch (err) {
-      if (!DocumentPicker.isCancel(err)) {
-        Alert.alert('Error', 'An unknown error occurred');
-        console.error('Document picker error:', err);
+      // For web, use the file input to select files
+      document.getElementById('fileInput')?.click();
+    } else {
+      try {
+        const results = await DocumentPicker.pick({
+          type: [DocumentPicker.types.allFiles],
+          allowMultiSelection: true,
+        });
+        setFileResponses(results);
+      } catch (err) {
+        if (!DocumentPicker.isCancel(err)) {
+          Alert.alert('Error', 'An unknown error occurred');
+          console.error('Document picker error:', err);
+        }
       }
+    }
+  };
+
+  // Handle file selection from the input on web
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const fileArray = Array.from(files).map(file => ({
+        name: file.name,
+        uri: URL.createObjectURL(file), // Create a local URL for the selected file
+        type: file.type || 'unknown',
+      }));
+      setFileResponses(fileArray);
     }
   };
 
@@ -185,6 +198,14 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
     <ImageBackground source={require('../src/background.jpg')} style={FileUploadStyle.background}>
       <View style={FileUploadStyle.overlay}>
 
+        <input
+          type="file"
+          id="fileInput"
+          multiple
+          onChange={handleFileInputChange}
+          style={{ display: 'none' }} 
+        />
+
         <TouchableOpacity style={FileUploadStyle.button} onPress={handleDocumentSelection}>
           <Text style={FileUploadStyle.buttonText}>Select Files</Text>
         </TouchableOpacity>
@@ -225,7 +246,7 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
           )}
         </ScrollView>
         
-        {/* Back Button */}
+
         <TouchableOpacity style={FileUploadStyle.backButton} onPress={() => navigation.goBack()}>
           <Text style={FileUploadStyle.backButtonText}>Back</Text>
         </TouchableOpacity>

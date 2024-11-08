@@ -9,10 +9,9 @@ const RegistrationStyle = StyleSheet.create ({
   },
   formContainer: {
     padding: 20,
-    // backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent background
     borderRadius: 10,
-    width: '90%', // Responsive width
-    alignItems: 'center', // Center elements
+    width: '90%', 
+    alignItems: 'center', 
   },
   input: {
     height: 60,
@@ -23,22 +22,22 @@ const RegistrationStyle = StyleSheet.create ({
     paddingHorizontal: 10,
     borderRadius: 8,
     fontSize: 16,
-    backgroundColor: '#ffffff', // White background for inputs
+    backgroundColor: '#ffffff', 
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#333333', // Darker color for title
+    color: '#333333', 
   },
   button: {
-    backgroundColor: '#008CBA', // Bootstrap primary color
+    backgroundColor: '#008CBA', 
     borderRadius: 5,
     paddingVertical: 10,
     alignItems: 'center',
     marginTop: 16,
     marginBottom: 12,
-    width: 330, // Full width button
+    width: 330, 
   },
   buttonText: { color: '#ffffff', fontWeight: 'bold', fontSize: 16 },
   error: { color: 'red', fontSize: 14, marginBottom: 12 },

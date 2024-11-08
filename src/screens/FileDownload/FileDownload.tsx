@@ -165,7 +165,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as FileSystem from 'expo-file-system';
-import FileDownloadStyle from '../styles/FileDownloadStyle';
+import FileDownloadStyle from './FileDownloadStyle';
 
 const FileDownload: React.FC = () => {
   const navigation = useNavigation();

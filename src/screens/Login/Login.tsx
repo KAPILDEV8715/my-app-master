@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Welcome from './Welcome';
-import LoginStyle from '../styles/LoginStyle';
-import Button from './Button';
+import Welcome from '../Welcome';
+import LoginStyle from './LoginStyle';
+import Button from '../Button';
 
 
 type RootStackParamList = {
@@ -51,6 +51,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
             navigation.navigate('Home');
           } else {
             Alert.alert('Invalid credentials. Please try again.');
+            Alert.alert('Check Credentials');
           }
         } else {
           Alert.alert('No user data found.');
@@ -101,3 +102,4 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
 };
 
 export default Login;
+

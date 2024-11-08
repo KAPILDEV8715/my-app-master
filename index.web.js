@@ -1,11 +1,8 @@
-import { AppRegistry } from 'react-native';
-import { name as appName } from './app.json';
-import App from './App';
-
-
-
+import {AppRegistry} from 'react-native';
+import {name as appName} from './app.json';
+import App from './src/Mobile/App';
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept(); 
 }
 AppRegistry.registerComponent(appName, () => App);
 AppRegistry.runApplication(appName, {
