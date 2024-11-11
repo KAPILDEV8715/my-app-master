@@ -1,4 +1,4 @@
-import { Text, View, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Alert,  } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RegistrationStyle from './RegistrationStyle';
@@ -92,11 +92,7 @@ const Registration: React.FC<RegistrationProps> = ({ navigation, route }) => {
 
   return (
     <View style={RegistrationStyle.container}>
-      <ImageBackground
-        source={require('../src/background5.jpg')}
-        style={RegistrationStyle.background}
-        resizeMode="cover"
-      >
+      
         <Text style={RegistrationStyle.title}>Register User</Text>
         <View style={RegistrationStyle.formContainer}>
           <TextInput
@@ -144,7 +140,6 @@ const Registration: React.FC<RegistrationProps> = ({ navigation, route }) => {
             <Text style={RegistrationStyle.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
     </View>
   );
 };

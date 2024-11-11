@@ -9,6 +9,9 @@ import FileDownload from '../screens/FileDownload/FileDownload';
 import FileUpload from '../screens/FileUpload/FileUpload';
 import Registration from '../screens/Registration/Registration';
 import Data from '../screens/User/User';
+// if (__DEV__) {
+//   require("./ReactotronConfig");
+// }
 
 const Stack = createStackNavigator();
 
@@ -25,7 +28,7 @@ const App = () => {
           component={Login}
           options={{
             header: (props: any) => <Header {...props} />,
-            headerShown: false, // This hides the header
+            headerShown: false, 
           }}
         />
         <Stack.Screen

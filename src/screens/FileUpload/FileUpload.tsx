@@ -112,7 +112,7 @@
 
 // export default FileUpload;
 import React, { useState, useEffect } from 'react';
-import { View, Text, Alert, ScrollView, TouchableOpacity, ImageBackground, Platform } from 'react-native';
+import { View, Text, Alert, ScrollView, TouchableOpacity,  Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FileUploadStyle from './FileUploadStyle';
 
@@ -146,7 +146,7 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
     }
   };
 
-  // Handle file selection from the input on web
+  
   const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -195,7 +195,7 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
   }, []);
 
   return (
-    <ImageBackground source={require('../src/background.jpg')} style={FileUploadStyle.background}>
+    
       <View style={FileUploadStyle.overlay}>
 
         <input
@@ -251,7 +251,6 @@ const FileUpload: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Text style={FileUploadStyle.backButtonText}>Back</Text>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
   );
 };
 

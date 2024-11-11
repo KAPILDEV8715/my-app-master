@@ -45,10 +45,15 @@ const RegistrationStyle = StyleSheet.create ({
     marginTop: 20,
   },
   backButton: {
-    backgroundColor: '#008CBA',
+    backgroundColor: '#008CBA', 
     borderRadius: 5,
-    width:330,
-    padding: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+    marginTop: 16,
+    marginBottom: 12,
+    width: 330, 
+    alignContent:'center',
+
   },
   backButtonText: {
     color: '#ffffff',

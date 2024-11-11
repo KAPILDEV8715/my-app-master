@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  ImageBackground,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -65,11 +64,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
 
   return (
     <View style={LoginStyle.container}>
-      <ImageBackground
-        source={require('../src/background.jpg')}
-        style={LoginStyle.background}
-        resizeMode="cover"
-      >
+      
         <Welcome />
         <View style={LoginStyle.innerContainer}>
           <TextInput
@@ -96,7 +91,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
             <Button title='Go to Registration' onPress={() => navigation.navigate('Registration')} />
           </View>
         </View>
-      </ImageBackground>
     </View>
   );
 };

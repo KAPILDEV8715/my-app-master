@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, Alert, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, Button, FlatList, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserStyle from './UserStyle';
 
@@ -85,7 +85,7 @@ const Profiles: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={require('../src/background3.jpg')} style={UserStyle.background}>
+    
       <View style={UserStyle.overlay}>
         <Text style={UserStyle.title}>All Users</Text>
         {userData.length > 0 ? (
@@ -101,7 +101,6 @@ const Profiles: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Text style={UserStyle.backButtonText}>Back</Text>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
   );
 };
 

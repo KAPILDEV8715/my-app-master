@@ -51,7 +51,7 @@ const LoginStyle = StyleSheet.create({
         width: 87,
       },
       buttonText: {
-        color: '#ffffff',
+        color: 'blue',
         fontWeight: 'bold',
         fontSize: 16,
       },
@@ -61,12 +61,17 @@ const LoginStyle = StyleSheet.create({
         marginBottom: 12,
       },
       registerButton: {
-        marginTop: 20,
+        backgroundColor: '#008CBA', // a calming blue color
+        borderRadius: 5,
+        paddingVertical: 10,
+        paddingTop:10,
+        marginTop:10,
         alignItems: 'center',
       },
       registerButtonText: {
-        color: '#40E0D0',
-        fontSize: 18,
+        color: 'blue',
+        fontWeight: 'bold',
+        fontSize: 16,
       },
 })
 
